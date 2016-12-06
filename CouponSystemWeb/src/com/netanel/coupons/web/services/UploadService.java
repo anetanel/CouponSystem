@@ -26,7 +26,9 @@ public class UploadService {
 	                                @FormDataParam("file") FormDataContentDisposition fileMetaData) throws Exception
 	{
 		System.out.println("in upload");
-	    String UPLOAD_PATH = "C:\\Users\\attaln\\git\\CouponSystemMaven\\CouponSystemMaven\\WebContent\\icons\\";
+		//TODO: Change to variable location
+		// Preferably with standalone.xml file too.
+	    String UPLOAD_PATH = "C:\\Users\\attaln\\git\\CouponSystem\\CouponSystemWeb\\WebContent\\icons\\";
 	    try
 	    {
 	        int read = 0;

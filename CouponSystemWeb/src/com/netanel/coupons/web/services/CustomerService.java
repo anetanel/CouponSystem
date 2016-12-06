@@ -65,7 +65,7 @@ public class CustomerService {
 	@GET
 	@Path("GetCouponById")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Coupon getCoupon(long couponId) throws DAOException {
+	public Coupon getCoupon(@QueryParam("couponId") long couponId) throws DAOException {
 		return getFacade().getCoupon(couponId);
 	}
 	
