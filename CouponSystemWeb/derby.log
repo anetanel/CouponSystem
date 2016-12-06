@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Nov 28 08:55:01 IST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-0158-a9b7-22c1-000005dbfcf8 
+on database directory C:\coupondb\DerbyCouponDb.db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/attaln/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_112-b15
+user.dir=C:\Users\attaln\git\CouponSystemMaven\CouponSystemMaven
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
