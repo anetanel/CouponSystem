@@ -18,9 +18,9 @@ public class TestIncome {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("PersistenceUnit");
 		EntityManager em = emf.createEntityManager();
 		
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.persist(income);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 		em.close();
 		
 	}

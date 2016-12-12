@@ -63,6 +63,12 @@ public class GeneralService {
 	
 	}
 	
+	@POST
+	@Path("testQueue")
+	public void testQueue() {
+		bd.testQueue();
+	}
+	
 	
 	
 	
