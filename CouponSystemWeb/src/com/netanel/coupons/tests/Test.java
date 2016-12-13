@@ -2,15 +2,15 @@ package com.netanel.coupons.tests;
 
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.netanel.coupons.jbeans.CouponType;
+import com.netanel.coupons.income.Income;
+import com.netanel.coupons.income.IncomeType;
 
 public class Test {
 	public static void main(String[] args) { 
-		String str = "2016-11-07T22:00:00.000Z";
-		System.out.println(LocalDate.parse(str.substring(0, 10)));
+		Income income = new Income("blah", LocalDate.now(), 10.0, IncomeType.COMPANY_NEW_COUPON);
+		System.out.println(income);
+		
+		
 		
 	}
 	

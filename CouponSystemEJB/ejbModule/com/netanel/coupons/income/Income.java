@@ -6,6 +6,10 @@ import java.lang.Long;
 import java.lang.String;
 import java.time.LocalDate;
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Income
@@ -13,6 +17,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="INCOME")
+@XmlRootElement(name="Income")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Income implements Serializable {
 
 	@Id
@@ -21,6 +27,7 @@ public class Income implements Serializable {
 	private Long id;
 	
 	@Column(name="NAME")
+	@XmlElement(name="IncomeName")
 	private String name;
 	
 	@Column(name="DATE")
