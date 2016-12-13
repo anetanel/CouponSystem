@@ -20,9 +20,12 @@ import javax.ws.rs.core.MediaType;
 import com.netanel.coupons.exception.CouponException;
 import com.netanel.coupons.exception.DAOException;
 import com.netanel.coupons.facades.CompanyFacade;
+import com.netanel.coupons.income.Income;
+import com.netanel.coupons.income.IncomeType;
 import com.netanel.coupons.jbeans.Company;
 import com.netanel.coupons.jbeans.Coupon;
 import com.netanel.coupons.jbeans.CouponType;
+import com.netanel.coupons.web.business.BusinessDelegate;
 
 @Path("company")
 public class CompanyService {
@@ -33,6 +36,7 @@ public class CompanyService {
 	private HttpServletRequest request;
 	
 	private static final String FACADE = "FACADE"; 
+	private BusinessDelegate bd = new BusinessDelegate();
 	
 	//
 	// Constructors
@@ -57,6 +61,10 @@ public class CompanyService {
 						couponMap.get("image"));
 		System.out.println(coupon);
 		getFacade().createCoupon(coupon);
+		bd.storeIncome(new Income(getFacade().getCompName(),
+							LocalDate.now(),
+							100.0,
+							IncomeType.COMPANY_NEW_COUPON));
 	}
 	
 	@DELETE
@@ -101,6 +109,10 @@ public class CompanyService {
 									couponMap.get("image"));
 		System.out.println(coupon);
 		getFacade().updateCoupon(coupon);
+		bd.storeIncome(new Income(getFacade().getCompName(),
+				LocalDate.now(),
+				10.0,
+				IncomeType.COMPANY_UPDATE_COUPON));
 	}
 	
 	@GET

@@ -7,13 +7,9 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
-import javax.jms.TextMessage;
 
 import com.netanel.coupons.income.Income;
 
-/**
- * Message-Driven Bean implementation class for: IncomeConsumerBean
- */
 @MessageDriven(
 		activationConfig = { @ActivationConfigProperty(
 				propertyName = "destination", propertyValue = "IncomeQueue"), @ActivationConfigProperty(
@@ -26,18 +22,16 @@ public class IncomeConsumerBean implements MessageListener {
 	IncomeService incomeService;
 	
     public IncomeConsumerBean() {
-   
     }
 	
 	public void onMessage(Message message) {
+			ObjectMessage objMsg = (ObjectMessage) message;
             try {
-				//Object object = ((ObjectMessage)message).getObject();
-            	Income income = (Income) ((ObjectMessage)message).getObject();
+            	Income income = (Income) objMsg.getObject();
 				System.out.println(this.getClass().getName()
-						+ "has received a message : " + (Income) income);
+						+ " has received a message : " + (Income) income);
 				System.out.println(incomeService.storeIncome(income));
 			} catch (JMSException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
     }

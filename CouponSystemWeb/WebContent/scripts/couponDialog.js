@@ -75,8 +75,11 @@
                 "type": $scope.selectedRow.CouponType,
                 "message": $scope.selectedRow.CouponMessage,
                 "price": $scope.selectedRow.CouponPrice,
-                "image": '/img/' + $scope.iconFile.name
+                "image": $scope.selectedRow.CouponImagePath
             };
+            if ($scope.iconFile) {
+            	coupon.image = '/img/' + $scope.iconFile.name;
+            }
 
             if (isNew) {
                 createCoupon(coupon);
@@ -92,7 +95,9 @@
         };
 
         var success = function () {
-        	upload();
+        	if ($scope.iconFile) {
+        		upload();
+        	}
             $uibModalInstance.close();
             $scope.selectedRow = null;
             getCoupons();

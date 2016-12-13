@@ -16,20 +16,10 @@ public class IncomeServiceBean implements IncomeService {
     	System.out.println("**********************" + this.getClass().getName() + " started...");
     }
     
-    @Override
-    public String doSomething() {
-    	return "*******************************" + this.getClass().getName() + " is Doing something..";
-    }
 
 	@Override
 	public String storeIncome(Income income) {
-		
-		//entityManager.getTransaction().begin();
-		
 		entityManager.persist(income);
-		//entityManager.getTransaction().commit();
-		//entityManager.close();
-		
-		return "Storing Income: " + income + " em: " + entityManager;		
+		return "Storing Income: " + income;		
 	}
 }

@@ -3,7 +3,7 @@ package com.netanel.coupons.income;
 public enum IncomeType {
 	CUSTOMER_PURCHASE("Customer purchase"),
 	COMPANY_NEW_COUPON("Company created new Coupon"),
-	COMPANY_UPDATE_COUPON("Company updatred Coupon");
+	COMPANY_UPDATE_COUPON("Company updated Coupon");
 	
 	private String description;
 	
