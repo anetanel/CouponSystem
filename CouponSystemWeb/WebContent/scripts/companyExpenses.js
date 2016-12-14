@@ -6,7 +6,10 @@
     	$scope.companyName = companyName;
 
     	$scope.expenses = {
-        		enableRowSelection: false,
+    			
+    			showGridFooter: true,
+    			showColumnFooter: true,
+    			enableRowSelection: false,
         		enableFiltering: true,
         		multiSelect: false,
                 enableSelectAll: false,
@@ -18,11 +21,11 @@
                         type: 'number',
                         sort: {direction: uiGridConstants.ASC, priority: 0}
                     },
-                    {name: 'clientId', displayName: 'Client ID'},
-                    {name: 'name', displayName: 'Client Name'},
-                    {name: 'clientType'},
+//                    {name: 'clientId', displayName: 'Client ID'},
+//                    {name: 'name', displayName: 'Client Name'},
+//                    {name: 'clientType'},
                     {name: 'date', type: 'date', cellFilter: 'date:\'yyyy-MM-dd\''},
-                    {name: 'amount'},
+                    {name: 'amount',aggregationType: uiGridConstants.aggregationTypes.sum},
                     {name: 'incomeType'} 
                 ],
                 data:[]

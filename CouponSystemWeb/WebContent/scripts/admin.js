@@ -147,6 +147,8 @@
             ]
         };
         $scope.incomes = {
+        		showGridFooter: true,
+    			showColumnFooter: true,
         		enableRowSelection: false,
         		enableFiltering: true,
         		multiSelect: false,
@@ -163,7 +165,7 @@
                     {name: 'name', displayName: 'Client Name'},
                     {name: 'clientType'},
                     {name: 'date', type: 'date', cellFilter: 'date:\'yyyy-MM-dd\''},
-                    {name: 'amount'},
+                    {name: 'amount', aggregationType: uiGridConstants.aggregationTypes.sum},
                     {name: 'incomeType'} 
                 ],
                 data:[]
@@ -173,9 +175,7 @@
         // Load Companies and Customers details
         //
 
-        $scope.getAllClients();
-        //$scope.viewAllIncome();
-        
+        $scope.getAllClients();        
 
     };
 
