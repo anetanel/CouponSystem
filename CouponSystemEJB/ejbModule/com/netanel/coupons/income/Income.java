@@ -6,10 +6,6 @@ import java.lang.Long;
 import java.lang.String;
 import java.time.LocalDate;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Entity implementation class for Entity: Income
@@ -17,8 +13,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name="INCOME")
-@XmlRootElement(name="Income")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Income implements Serializable {
 
 	@Id
@@ -27,7 +21,6 @@ public class Income implements Serializable {
 	private Long id;
 	
 	@Column(name="NAME")
-	@XmlElement(name="IncomeName")
 	private String name;
 	
 	@Column(name="DATE")
@@ -39,68 +32,96 @@ public class Income implements Serializable {
 	@Column(name="INCOME_TYPE")
 	private IncomeType incomeType;
 	
+	@Column(name="CLIENT_ID")
+	private long clientId;
+	
+	@Column(name="CLIENT_TYPE")
+	private String clientType;
+	
+	
 	private static final long serialVersionUID = 1L;
 
 	public Income() {
-	}   
-	
-	public Income(String name, LocalDate date, Double amount, IncomeType incomeType) {
+	}
+
+	public Income(String name, LocalDate date, Double amount, IncomeType incomeType, long clientId, String clientType) {
 		this.name = name;
 		this.date = date;
 		this.amount = amount;
 		this.incomeType = incomeType;
+		this.clientId = clientId;
+		this.clientType = clientType;
 	}
-	
+
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}   
+	}
+
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}   
-	public LocalDate getDate() {
-		return this.date;
 	}
 
+	public LocalDate getDate() {
+		return date;
+	}
 
 	public void setDate(LocalDate date) {
 		this.date = date;
-	}   
+	}
+
 	public Double getAmount() {
-		return this.amount;
+		return amount;
 	}
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	
+
 	public IncomeType getIncomeType() {
 		return incomeType;
 	}
-	
+
 	public void setIncomeType(IncomeType incomeType) {
 		this.incomeType = incomeType;
 	}
-	
+
+	public long getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(long clientId) {
+		this.clientId = clientId;
+	}
+
+	public String getClientType() {
+		return clientType;
+	}
+
+	public void setClientType(String clientType) {
+		this.clientType = clientType;
+	}
+
 	@Override
 	public String toString() {
 		return "Income [id=" + id + ", name=" + name + ", date=" + date + ", amount=" + amount + ", incomeType="
-				+ incomeType + "]";
+				+ incomeType + ", clientId=" + clientId + ", clientType=" + clientType + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + (int) (clientId ^ (clientId >>> 32));
+		result = prime * result + ((clientType == null) ? 0 : clientType.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((incomeType == null) ? 0 : incomeType.hashCode());
@@ -122,6 +143,13 @@ public class Income implements Serializable {
 				return false;
 		} else if (!amount.equals(other.amount))
 			return false;
+		if (clientId != other.clientId)
+			return false;
+		if (clientType == null) {
+			if (other.clientType != null)
+				return false;
+		} else if (!clientType.equals(other.clientType))
+			return false;
 		if (date == null) {
 			if (other.date != null)
 				return false;
@@ -140,6 +168,8 @@ public class Income implements Serializable {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
+	}   
+	
+	
    
 }

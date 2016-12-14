@@ -1,10 +1,7 @@
 package com.netanel.coupons.web.services;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,8 +18,6 @@ import javax.ws.rs.core.MediaType;
 import com.netanel.coupons.crypt.Password;
 import com.netanel.coupons.exception.DAOException;
 import com.netanel.coupons.facades.AdminFacade;
-import com.netanel.coupons.income.Income;
-import com.netanel.coupons.income.IncomeType;
 import com.netanel.coupons.jbeans.Company;
 import com.netanel.coupons.jbeans.Coupon;
 import com.netanel.coupons.jbeans.Customer;
@@ -170,6 +165,22 @@ public class AdminService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public IncomeList viewAllIncome() {
 		IncomeList incomes = new IncomeList(bd.viewAllIncome());
+		return incomes;
+	}
+	
+	@GET
+	@Path("viewIncomeByCustomer")
+	@Produces(MediaType.APPLICATION_JSON)
+	public IncomeList viewIncomeByCustomer(@QueryParam("id") long customerId) {
+		IncomeList incomes = new IncomeList(bd.viewIncomeByCustomer(customerId));
+		return incomes;
+	}
+	
+	@GET
+	@Path("viewIncomeByCompany")
+	@Produces(MediaType.APPLICATION_JSON)
+	public IncomeList viewIncomeByCompany(@QueryParam("id") long companyId) {
+		IncomeList incomes = new IncomeList(bd.viewIncomeByCompany(companyId));
 		return incomes;
 	}
 

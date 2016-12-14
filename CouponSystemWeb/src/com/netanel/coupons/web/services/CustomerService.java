@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.netanel.coupons.exception.CouponException;
 import com.netanel.coupons.exception.DAOException;
+import com.netanel.coupons.facades.ClientType;
 import com.netanel.coupons.facades.CustomerFacade;
 import com.netanel.coupons.income.Income;
 import com.netanel.coupons.income.IncomeType;
@@ -33,26 +34,17 @@ public class CustomerService {
 
 	}
 
-//	@POST
-//	@Path("buyCoupon")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public void BuyCoupon(Coupon coupon) throws DAOException, CouponException {
-//		getFacade().buyCoupon(coupon);
-//	}
-
 	@POST
 	@Path("buyCouponById")
 	public void BuyCoupon(@QueryParam("couponId") long couponId) throws DAOException, CouponException {
 		getFacade().buyCoupon(couponId);
-		bd.storeIncome(new Income(getFacade().getCustName(), LocalDate.now(), getFacade().getCoupon(couponId).getPrice(),
-				IncomeType.CUSTOMER_PURCHASE));
+		bd.storeIncome(new Income(getFacade().getCustName(),
+				LocalDate.now(),
+				getFacade().getCoupon(couponId).getPrice(),
+				IncomeType.CUSTOMER_PURCHASE,
+				getFacade().getCustId(),
+				ClientType.CUSTOMER.toString()));
 	}
-
-//	@POST
-//	@Path("buyCouponByTitle")
-//	public void BuyCoupon(@QueryParam("couponTitle") String couponTitle) throws DAOException, CouponException {
-//		getFacade().buyCoupon(couponTitle);
-//	}
 
 	@GET
 	@Path("getAllCoupons")
@@ -110,7 +102,7 @@ public class CustomerService {
 		CustomerFacade facade = getFacade();
 		return facade.toString();
 	}
-
+	
 	private CustomerFacade getFacade() throws DAOException {
 		if (request.getSession().getAttribute(FACADE) instanceof CustomerFacade) {
 			return (CustomerFacade) request.getSession().getAttribute(FACADE);

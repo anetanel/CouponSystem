@@ -38,6 +38,38 @@
             <hr>
             <div ui-grid="customers" class="grid" ng-if="view.tab2Shown" ui-grid-selection></div>
         </uib-tab>
+        <uib-tab index="2" heading="Income Reports" select="view.tab3Shown = !view.tab3Shown" 
+        		deselect="view.tab3Shown = !view.tab3Shown">
+        	<br>
+        	<button type="button" class='btn btn-primary' ng-click="viewAllIncome()">All Incomes</button>
+        	
+			<div class="btn-group" uib-dropdown auto-close=disabled>
+				<button id="split-button" type="button" class="btn btn-primary" ng-click="viewIncomeByCompany(companyId)">Companies</button>
+				<button type="button" class="btn btn-primary" uib-dropdown-toggle>
+					<span class="caret"></span> <span class="sr-only">Split
+						button!</span>
+				</button>
+				<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+					aria-labelledby="split-button">
+					<li role="menuitem"><input type="text" class="form-control" placeholder="Company ID" ng-model="companyId"></li>
+				</ul>
+			</div>
+			
+			<div class="btn-group" uib-dropdown auto-close=disabled>
+				<button id="split-button" type="button" class="btn btn-primary" ng-click="viewIncomeByCustomer(customerId)">Customers</button>
+				<button type="button" class="btn btn-primary" uib-dropdown-toggle>
+					<span class="caret"></span> <span class="sr-only">Split
+						button!</span>
+				</button>
+				<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+					aria-labelledby="split-button">
+					<li role="menuitem"><input type="text" class="form-control" placeholder="Customer ID" ng-model="customerId"></li>
+				</ul>
+			</div>
+
+			<hr>
+        	<div ui-grid="incomes" class="grid" ng-if="view.tab3Shown" ui-grid-selection></div>
+        </uib-tab>
 
     </uib-tabset>
 </div>

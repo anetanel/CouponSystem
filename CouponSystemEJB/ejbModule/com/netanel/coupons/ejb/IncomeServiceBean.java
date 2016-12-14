@@ -1,6 +1,5 @@
 package com.netanel.coupons.ejb;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -40,7 +39,7 @@ public class IncomeServiceBean implements IncomeService {
 	@Override
 	public List<Income> viewIncomeByCustomer(long customerId) {
 		Query query;
-		query = entityManager.createQuery("SELECT i FROM Income AS i");
+		query = entityManager.createQuery("SELECT i FROM Income i WHERE i.clientType LIKE 'CUSTOMER' AND i.clientId=" + customerId);
 		List<Income> incomes = query.getResultList();
 		return incomes;
 	}
@@ -48,7 +47,9 @@ public class IncomeServiceBean implements IncomeService {
 
 	@Override
 	public List<Income> viewIncomeByCompany(long companyId) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query;
+		query = entityManager.createQuery("SELECT i FROM Income i WHERE i.clientType LIKE 'COMPANY' AND i.clientId=" + companyId);
+		List<Income> incomes = query.getResultList();
+		return incomes;
 	}
 }

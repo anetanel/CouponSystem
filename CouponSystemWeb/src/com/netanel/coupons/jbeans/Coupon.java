@@ -1,6 +1,5 @@
 package com.netanel.coupons.jbeans;
 
-import java.io.File;
 import java.time.LocalDate;
 
 import javax.swing.ImageIcon;

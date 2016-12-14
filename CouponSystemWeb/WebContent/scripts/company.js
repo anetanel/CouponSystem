@@ -82,6 +82,14 @@
                     $scope.companyCoupons.data = response.data;
                 });
         };
+        
+        $scope.showExpenses = function () {
+            var modalInstance = $uibModal.open({
+                controller: "companyExpenses",
+                templateUrl: 'html/companyExpenses.html',
+                resolve: {companyName : () => $scope.companyName}
+            })
+        };
 
         $scope.getCoupons();
 

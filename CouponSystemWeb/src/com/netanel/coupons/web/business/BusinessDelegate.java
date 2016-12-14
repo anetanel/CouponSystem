@@ -1,6 +1,5 @@
 package com.netanel.coupons.web.business;
 
-import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -41,28 +40,19 @@ public class BusinessDelegate {
 
 	public synchronized List<Income> viewAllIncome() {
 		List<Income> list = incomeService.viewAllIncome();
-//		System.out.println("Got List of Incomes!!!");
-//		for (Income income : list) {
-//			System.out.println(income);
-//		}
+		return list;
+	}
+	
+	public synchronized List<Income> viewIncomeByCustomer(long customerId) {
+		List<Income> list = incomeService.viewIncomeByCustomer(customerId);
+		return list;
+	}
+	
+	public synchronized List<Income> viewIncomeByCompany(long companyId) {
+		List<Income> list = incomeService.viewIncomeByCompany(companyId);
 		return list;
 	}
 
-	// public void testQueue() {
-	// try {
-	//
-	// Income income = new Income();
-	// income.setName("My name");
-	// income.setAmount(199.95);
-	// income.setDate(LocalDate.now());
-	//
-	// ObjectMessage objMsg = qsession.createObjectMessage(income);
-	// qsender.send(objMsg);
-	// close();
-	// } catch (JMSException e) {
-	// e.printStackTrace();
-	// }
-	// }
 
 	private void init() {
 		try {

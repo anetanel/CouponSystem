@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.netanel.coupons.exception.CouponException;
 import com.netanel.coupons.exception.DAOException;
+import com.netanel.coupons.facades.ClientType;
 import com.netanel.coupons.facades.CompanyFacade;
 import com.netanel.coupons.income.Income;
 import com.netanel.coupons.income.IncomeType;
@@ -26,6 +27,7 @@ import com.netanel.coupons.jbeans.Company;
 import com.netanel.coupons.jbeans.Coupon;
 import com.netanel.coupons.jbeans.CouponType;
 import com.netanel.coupons.web.business.BusinessDelegate;
+import com.netanel.coupons.web.income.IncomeList;
 
 @Path("company")
 public class CompanyService {
@@ -62,9 +64,11 @@ public class CompanyService {
 		System.out.println(coupon);
 		getFacade().createCoupon(coupon);
 		bd.storeIncome(new Income(getFacade().getCompName(),
-							LocalDate.now(),
-							100.0,
-							IncomeType.COMPANY_NEW_COUPON));
+				LocalDate.now(),
+				100.0,
+				IncomeType.COMPANY_NEW_COUPON,
+				getFacade().getCompId(),
+				ClientType.COMPANY.toString()));
 	}
 	
 	@DELETE
@@ -112,7 +116,9 @@ public class CompanyService {
 		bd.storeIncome(new Income(getFacade().getCompName(),
 				LocalDate.now(),
 				10.0,
-				IncomeType.COMPANY_UPDATE_COUPON));
+				IncomeType.COMPANY_UPDATE_COUPON,
+				getFacade().getCompId(),
+				ClientType.COMPANY.toString()));
 	}
 	
 	@GET
@@ -163,6 +169,15 @@ public class CompanyService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String whoAmI() throws DAOException {
 		return getFacade().toString();
+	}
+	
+	@GET
+	@Path("viewExpenses")
+	@Produces(MediaType.APPLICATION_JSON)
+	public IncomeList viewIncomeByCompany() throws DAOException {
+		long companyId = getFacade().getCompId();
+		IncomeList incomes = new IncomeList(bd.viewIncomeByCompany(companyId));
+		return incomes;
 	}
 
 	private CompanyFacade getFacade() throws DAOException {

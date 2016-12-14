@@ -5,7 +5,7 @@
 
         var view = this;
         $scope.selectedCompanyRow = false;
-        $scope.selectedCustomerRow = false;
+        $scope.selectedCustomerRow = false;        
 
         $scope.deleteClient = function (client) {
             if (client == 'Company') {
@@ -42,6 +42,27 @@
             $http.get("rest/admin/getAllCustomers")
                 .then(function (response) {
                     $scope.customers.data = response.data;
+                });
+        };
+        
+        $scope.viewAllIncome = function () {
+            $http.get("rest/admin/viewAllIncome")
+                .then(function (response) {
+                	$scope.incomes.data = response.data.incomes;
+                });
+        };
+        
+        $scope.viewIncomeByCustomer = function (customerId) {
+            $http.get("rest/admin/viewIncomeByCustomer?id=" + customerId)
+                .then(function (response) {
+                	$scope.incomes.data = response.data.incomes;
+                });
+        };
+        
+        $scope.viewIncomeByCompany = function (companyId) {
+            $http.get("rest/admin/viewIncomeByCompany?id=" + companyId)
+                .then(function (response) {
+                	$scope.incomes.data = response.data.incomes;
                 });
         };
 
@@ -125,12 +146,36 @@
                 {name: 'ClientCoupons', field: 'ClientCoupons.length', displayName: 'Coupons', type: 'number'}
             ]
         };
+        $scope.incomes = {
+        		enableRowSelection: false,
+        		enableFiltering: true,
+        		multiSelect: false,
+                enableSelectAll: false,
+                enableRowHeaderSelection: false,
+        		columnDefs: [
+                    {
+                        name: 'id',
+                        displayName: 'Income ID',
+                        type: 'number',
+                        sort: {direction: uiGridConstants.ASC, priority: 0}
+                    },
+                    {name: 'clientId', displayName: 'Client ID'},
+                    {name: 'name', displayName: 'Client Name'},
+                    {name: 'clientType'},
+                    {name: 'date', type: 'date', cellFilter: 'date:\'yyyy-MM-dd\''},
+                    {name: 'amount'},
+                    {name: 'incomeType'} 
+                ],
+                data:[]
+        };
 
         //
         // Load Companies and Customers details
         //
 
         $scope.getAllClients();
+        //$scope.viewAllIncome();
+        
 
     };
 
