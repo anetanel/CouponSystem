@@ -7,6 +7,7 @@
                 $scope.gridApi = gridApi;
             },
             enableFiltering: true,
+            enableRowSelection: true,
             columnDefs: [
                 {name: 'CouponId', type: 'number', sort: {direction: uiGridConstants.ASC, priority: 0}},
                 {name: 'CouponTitle'},
