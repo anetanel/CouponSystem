@@ -1,0 +1,83 @@
+<div class="modal-header">
+    <h4>Coupon Information</h4>
+</div>
+<form name="couponDialog" ng-submit="ok()">
+    <div class="modal-body">
+        <div ng-show="selectedRow.CouponId">
+            <label>ID: {{selectedRow.CouponId}}</label>
+        </div>
+        <div>
+            <label for="title">Title:</label>
+            <input id="title" type="text" class="form-control" ng-model="selectedRow.CouponTitle" required>
+        </div>
+
+        <div>
+            <label for="message">Description:</label>
+            <input id="message" type="text" class="form-control" ng-model="selectedRow.CouponMessage" required>
+        </div>
+
+    <div class="row">
+      <div class="col-md-6">
+      <label for="startDate">Start Date:</label>
+        <p class="input-group">
+          <input popover-enable="invalidStartDate" popover-is-open="invalidStartDate" popover-trigger="none" uib-popover="Enter valid date!" id="startDate" type="text" class="form-control" uib-datepicker-popup ng-model="selectedRow.CouponStartDate" is-open="startDateOpen" required/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="startDateOpen = !startDateOpen"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+      <label for="endDate">End Date:</label>
+        <p class="input-group">
+          <input popover-enable="invalidEndDate" popover-is-open="invalidEndDate" popover-trigger="none" uib-popover="Enter valid date!" id="endDate" type="text" class="form-control" uib-datepicker-popup ng-model="selectedRow.CouponEndDate" is-open="endDateOpen" required/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="endDateOpen = !endDateOpen"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
+
+        <div>
+            <label for="amount">No. of Coupons:</label>
+            <input id="amount" type="number" class="form-control" ng-model="selectedRow.CouponAmount" min="0" max="9999"
+                   required>
+        </div>
+
+        <div>
+            <label for="couponType">Type:</label>
+            <select id="couponType" class="form-control" ng-options="type for type in couponTypes"
+                    ng-model="selectedRow.CouponType" required="required">
+                <option selected disabled value="">-Select-</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="price">Price:</label>
+            <input id="price" class="form-control" type="number" ng-model="selectedRow.CouponPrice" step="any" min="0"
+                   max="9999" required>
+        </div>
+
+<!--         	<div> -->
+<!--         		<ng-form name="uploadForm" action="rest/upload" method="post" enctype="multipart/form-data"> -->
+<!--         			<input type="file" name="file" accept="image/*" class="btn btn-default"> -->
+<!--         			<input type="submit" value="Upload Image" class="btn btn-default"/> -->
+<!--         		</ng-form> -->
+<!--         	</div> -->
+		<div>
+		<label>Icon:</label>
+		<br>
+<!-- 		<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-warning'" dismiss-on-timeout="5000" close="closeAlert($index)">{{alert.message}}</div> -->
+        <img ng-hide="iconFile" ng-src="{{selectedRow.CouponImagePath}}" style="width: 200px; height: auto;"/>
+        <img ngf-src="iconFile" ngf-resize="{width: 200, height: 200}"/>
+		<br>
+		<div class="btn btn-default" ngf-accept="'image/*'" ngf-select="selectIcon($file)" >Upload New Coupon Icon</div>
+		</div>
+        
+		
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btnCustom">OK</button>
+        <button class="btn btn-primary btnCustom" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
