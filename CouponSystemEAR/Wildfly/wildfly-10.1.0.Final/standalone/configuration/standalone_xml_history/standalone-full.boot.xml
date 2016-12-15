@@ -418,7 +418,7 @@
             </servlet-container>
             <handlers>
                 <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
-                <file name="images" path="C:\\Users\\attaln\\git\\CouponSystem\\CouponSystemWeb\\WebContent\\icons" directory-listing="true"/>
+                <file name="images" path="C:\\Users\\netanel\\git\\CouponSystem\\CouponSystemWeb\\WebContent\\icons" directory-listing="true"/>
             </handlers>
             <filters>
                 <response-header name="server-header" header-name="Server" header-value="WildFly/10"/>

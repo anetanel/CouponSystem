@@ -32,10 +32,6 @@ class DB {
 		p.setProperty("derby.language.sequence.preallocator", "1");
 		cpds = new ComboPooledDataSource();
 		try {
-//			cpds.setDriverClass( "org.sqlite.JDBC" );
-//			cpds.setJdbcUrl( "jdbc:sqlite:c:\\coupondb\\CouponsDB.db" );
-//			cpds.setDriverClass( "org.apache.derby.jdbc.EmbeddedDriver" );
-//			cpds.setJdbcUrl( "jdbc:derby:C:\\coupondb\\DerbyCouponDb.db" );
 			cpds.setDriverClass( "org.apache.derby.jdbc.ClientDriver");
 			cpds.setJdbcUrl( "jdbc:derby://localhost/C:\\coupondb\\DerbyCouponDb.db" );
 
