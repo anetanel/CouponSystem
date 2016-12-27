@@ -10,6 +10,11 @@ import javax.jms.ObjectMessage;
 
 import com.netanel.coupons.income.Income;
 
+/**
+ * Income Consumer Message Driven Bean.
+ * Listens to the "IncomeQueue" queue, and passes the {@code Income} object to the Income Service for persisting. 
+ * @see IncomeService 
+ */
 @MessageDriven(
 		activationConfig = { @ActivationConfigProperty(
 				propertyName = "destination", propertyValue = "IncomeQueue"), @ActivationConfigProperty(
@@ -19,18 +24,17 @@ import com.netanel.coupons.income.Income;
 public class IncomeConsumerBean implements MessageListener {
 
 	@EJB
-	IncomeService incomeService;
+	private IncomeService incomeService;
 	
     public IncomeConsumerBean() {
     }
 	
+    
 	public void onMessage(Message message) {
 			ObjectMessage objMsg = (ObjectMessage) message;
             try {
             	Income income = (Income) objMsg.getObject();
-				System.out.println(this.getClass().getName()
-						+ " has received a message : " + (Income) income);
-				System.out.println(incomeService.storeIncome(income));
+				incomeService.storeIncome(income);
 			} catch (JMSException e) {
 				e.printStackTrace();
 			}

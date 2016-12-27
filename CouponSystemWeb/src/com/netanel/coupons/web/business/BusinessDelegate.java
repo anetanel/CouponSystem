@@ -29,9 +29,13 @@ public class BusinessDelegate {
 
 	public synchronized void storeIncome(Income income) {
 		try {
+			qcon = qconFactory.createQueueConnection();
+			qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+			queue = (Queue) ctx.lookup(JMS_QUEUE_INCOME_QUEUE);
+			qsender = qsession.createSender(queue);
 			ObjectMessage objMsg = qsession.createObjectMessage(income);
 			qsender.send(objMsg);
-		} catch (JMSException e) {
+		} catch (JMSException | NamingException e) {
 			e.printStackTrace();
 		} finally {
 			close();
@@ -66,11 +70,11 @@ public class BusinessDelegate {
 			incomeService = (IncomeService) ctx.lookup(
 					"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
 			qconFactory = (QueueConnectionFactory) ctx.lookup(CONNECTION_FACTORY);
-			qcon = qconFactory.createQueueConnection();
-			qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
-			queue = (Queue) ctx.lookup(JMS_QUEUE_INCOME_QUEUE);
-			qsender = qsession.createSender(queue);
-		} catch (NamingException | JMSException e) {
+//			qcon = qconFactory.createQueueConnection();
+//			qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
+//			queue = (Queue) ctx.lookup(JMS_QUEUE_INCOME_QUEUE);
+//			qsender = qsession.createSender(queue);
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
@@ -80,6 +84,7 @@ public class BusinessDelegate {
 			qsender.close();
 			qsession.close();
 			qcon.close();
+			//ctx.close();
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}

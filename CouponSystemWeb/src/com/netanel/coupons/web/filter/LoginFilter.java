@@ -24,11 +24,8 @@ public class LoginFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//TODO: remove system outs
-
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		//String url = req.getContextPath() + "/index.html";
 		HttpSession session = req.getSession(false);
 		
 		
@@ -38,9 +35,6 @@ public class LoginFilter implements Filter {
 		} else if (session.getAttribute("FACADE") == null){
 			filterOutput(res, "No Facade in Session! <br> Redirecting to Login Page.");
 			return;
-		} else {
-			
-			System.out.println(session.getAttribute("FACADE").getClass().getSimpleName() + " found in session!");
 		}
 		
 		// pass the request along the filter chain
@@ -50,8 +44,6 @@ public class LoginFilter implements Filter {
 	private void filterOutput(HttpServletResponse res, String str) throws IOException {
 		res.setContentType("application/json");
 		PrintWriter out = res.getWriter();
-		
-		System.out.println(str);
 		
 		res.setStatus(500);
 		out.print("{\"filter\": \""+ str +"\", \"redirect\": true}");

@@ -9,6 +9,11 @@ import javax.persistence.Query;
 
 import com.netanel.coupons.income.Income;
 
+/**
+ * Income Service Stateless Bean.
+ * Used to persist client's income and retrieve income information.
+ *
+ */
 @Stateless
 public class IncomeServiceBean implements IncomeService {
 
@@ -21,9 +26,8 @@ public class IncomeServiceBean implements IncomeService {
     
 
 	@Override
-	public String storeIncome(Income income) {
+	public void storeIncome(Income income) {
 		entityManager.persist(income);
-		return "Storing Income: " + income;		
 	}
 
 

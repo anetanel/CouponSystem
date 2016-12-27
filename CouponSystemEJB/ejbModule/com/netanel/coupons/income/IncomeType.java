@@ -1,5 +1,9 @@
 package com.netanel.coupons.income;
 
+/**
+ * Income Type Enum.
+ *
+ */
 public enum IncomeType {
 	CUSTOMER_PURCHASE("Customer purchase"),
 	COMPANY_NEW_COUPON("Company created new Coupon"),
