@@ -18,11 +18,9 @@ import com.netanel.coupons.income.Income;
 public class IncomeServiceBean implements IncomeService {
 
 	@PersistenceContext(unitName="PersistenceUnit")
-	protected EntityManager entityManager;
+	private EntityManager entityManager;
 	
-    public IncomeServiceBean() {
-    	System.out.println("**********************" + this.getClass().getName() + " started...");
-    }
+    public IncomeServiceBean() {}
     
 
 	@Override

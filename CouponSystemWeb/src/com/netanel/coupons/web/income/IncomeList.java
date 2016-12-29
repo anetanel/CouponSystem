@@ -4,6 +4,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import com.netanel.coupons.income.Income;
 
+/**
+ * Wrapper for {@code List<Income>} object. Used by JAXB to convert to JSON.
+ *
+ */
 @XmlRootElement
 public class IncomeList {
 	private List<Income> incomes;

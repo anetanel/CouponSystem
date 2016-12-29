@@ -70,10 +70,6 @@ public class BusinessDelegate {
 			incomeService = (IncomeService) ctx.lookup(
 					"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
 			qconFactory = (QueueConnectionFactory) ctx.lookup(CONNECTION_FACTORY);
-//			qcon = qconFactory.createQueueConnection();
-//			qsession = qcon.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
-//			queue = (Queue) ctx.lookup(JMS_QUEUE_INCOME_QUEUE);
-//			qsender = qsession.createSender(queue);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
